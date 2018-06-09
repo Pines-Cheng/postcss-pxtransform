@@ -11,20 +11,20 @@ $ npm install postcss-pxtransform --save-dev
 ```
 
 ## Usage
-其中rootValue 默认为40。
 
 ### 小程序
 ```js
 options = {
-    designWidth: 750,
     platform: 'weapp',
+    designWidth: 750,
 }
 ```
 
 ### H5
-```
+```js
 options = {
     platform: 'h5,
+    designWidth: 750,
 }
 ```
 
@@ -78,26 +78,11 @@ fs.writeFile('main-rem.css', processedCss, function (err) {
 });
 ```
 
-## 配置
-**options** 
-
-Type: `Object | Null`
-
-- `platform` `weapp` 或 `h5`
-  
-### 小程序
-platform === 'weapp'时，designWidth 为必传。
-
-参数：
-- designWidth `640` `750` `828`
-
-
-### H5
-platform === 'h5'时，其余配置默认如下：
+## 配置 **options** 
+参数默认值如下：
 
 ```js
 {
-    rootValue: 40,
     unitPrecision: 5,
     propList: ['*'],
     selectorBlackList: [],
@@ -107,23 +92,44 @@ platform === 'h5'时，其余配置默认如下：
 }
 ```
 
-参数：
-- `rootValue` (Number) The root element font size.
-- `unitPrecision` (Number) The decimal numbers to allow the REM units to grow to.
-- `propList` (Array) The properties that can change from px to rem.
-    - Values need to be exact matches.
-    - Use wildcard `*` to enable all properties. Example: `['*']`
-    - Use `*` at the start or end of a word. (`['*position*']` will match `background-position-y`)
-    - Use `!` to not match a property. Example: `['*', '!letter-spacing']`
-    - Combine the "not" prefix with the other prefixes. Example: `['*', '!font*']` 
-- `selectorBlackList` (Array) The selectors to ignore and leave as px.
-    - If value is string, it checks to see if selector contains the string.
-        - `['body']` will match `.body-class`
-    - If value is regexp, it checks to see if the selector matches the regexp.
-        - `[/^body$/]` will match `body` but not `.body`
-- `replace` (Boolean) replaces rules containing rems instead of adding fallbacks.
-- `mediaQuery` (Boolean) Allow px to be converted in media queries.
-- `minPixelValue` (Number) Set the minimum pixel value to replace.
+Type: `Object | Null`
+
+###  `platform` （String）（必填）
+`weapp` 或 `h5`
+
+### `designWidth`（Number）（必填）
+`640` `750` `828`
+
+### `rootValue` (Number) (必填)
+(Number) The root element font size.
+
+### `unitPrecision` (Number) 
+The decimal numbers to allow the REM units to grow to.
+
+### `propList` (Array) 
+The properties that can change from px to rem.
+
+- Values need to be exact matches.
+- Use wildcard `*` to enable all properties. Example: `['*']`
+- Use `*` at the start or end of a word. (`['*position*']` will match `background-position-y`)
+- Use `!` to not match a property. Example: `['*', '!letter-spacing']`
+- Combine the "not" prefix with the other prefixes. Example: `['*', '!font*']`
+ 
+### `selectorBlackList`
+(Array) The selectors to ignore and leave as px.
+- If value is string, it checks to see if selector contains the string.
+  - `['body']` will match `.body-class`
+- If value is regexp, it checks to see if the selector matches the regexp.
+  - `[/^body$/]` will match `body` but not `.body`
+
+### `replace` (Boolean) 
+replaces rules containing rems instead of adding fallbacks.
+
+### `mediaQuery` (Boolean) 
+Allow px to be converted in media queries.
+
+### `minPixelValue` (Number) 
+Set the minimum pixel value to replace.
 
 
 ## A message about ignoring properties
