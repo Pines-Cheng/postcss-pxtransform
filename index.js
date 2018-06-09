@@ -12,18 +12,24 @@ const DEVICE_RATIO = {
     '828': 1.81 / 2,
 }
 
-const DEFAULT_OPTIONS = {
+const DEFAULT_H5_OPTIONS = {
+    platform: 'h5',
+    designWidth: 750,
     rootValue: 40,
     propList: ['*'], // enable all properties
 }
 
-module.exports = postcss.plugin('postcss-pxtransform', function (opts) {
-    opts = opts || {
-        designWidth: 750,
-        platform: PLATFORM.WEAPP,
-    }
+const DEFAULT_WEAPP_OPTIONS = {
+    platform: 'weapp',
+    designWidth: 750,
+    rootValue: 1,
+    propList: ['*'], // enable all properties
+}
 
-    // Work with options here
+module.exports = postcss.plugin('postcss-pxtransform', function (opts) {
+
+    opts = opts || DEFAULT_WEAPP_OPTIONS
+
     return function (root, result) {
         switch (opts.platform) {
             case PLATFORM.WEAPP:
@@ -34,10 +40,12 @@ module.exports = postcss.plugin('postcss-pxtransform', function (opts) {
     }
 })
 
-function dealWithWeapp ({root, opts}) {
+function dealWithWeapp ({root, opts, result}) {
+    opts = Object.assign({}, DEFAULT_WEAPP_OPTIONS, opts)
+    root = postcss(pxtorem(opts)).process(result).root
     root.walkDecls(function (decl) {
         let value = decl.value
-        value = value.replace(/([0-9.]+)px/ig, function (match, size) {
+        value = value.replace(/([0-9.]+)rem/ig, function (match, size) {
             return parseInt(size, 10) / DEVICE_RATIO[opts.designWidth] + 'rpx'
         })
         decl.value = value
@@ -45,6 +53,6 @@ function dealWithWeapp ({root, opts}) {
 }
 
 function dealWithH5 ({root, result, opts}) {
-    opts = Object.assign({}, DEFAULT_OPTIONS, opts)
+    opts = Object.assign({}, DEFAULT_H5_OPTIONS, opts)
     root = postcss(pxtorem(opts)).process(result).root
 }

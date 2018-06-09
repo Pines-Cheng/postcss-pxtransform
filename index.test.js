@@ -11,47 +11,39 @@ function run (input, output, opts) {
         })
 }
 
-// Write tests here
-
-it('does something', () => {
-    return run(`h1 {
-    margin: 0 0 20px;
-    font-size: 40px;
-    line-height: 1.2;
-    letter-spacing: 1px;
-}`, `h1 {
-    margin: 0 0 20rpx;
-    font-size: 40rpx;
-    line-height: 1.2;
-    letter-spacing: 1rpx;
-}`)
+describe('不传任何配置', () => {
+    it('不传任何配置', () => {
+        return run(`h1 {margin: 0 0 20px;font-size: 40px;line-height: 1.2;}`,
+            `h1 {margin: 0 0 20rpx;font-size: 40rpx;line-height: 1.2;}`)
+    })
 })
 
-it('does something', () => {
-    return run(`h1 {
-    margin: 0 0 20px;
-    font-size: 40px;
-    line-height: 1.2;
-    letter-spacing: 1px;
-}`, `h1 {
-    margin: 0 0 20rpx;
-    font-size: 40rpx;
-    line-height: 1.2;
-    letter-spacing: 1rpx;
-}`, {platform: 'weapp', designWidth: 750})
+describe('platform 为 weapp', () => {
+    it('{platform: \'weapp\', designWidth: 750} ', () => {
+        return run(`h1 {margin: 0 0 20px;font-size: 40px;line-height: 1.2;}`,
+            `h1 {margin: 0 0 20rpx;font-size: 40rpx;line-height: 1.2;}`,
+            {platform: 'weapp', designWidth: 750})
+    })
+
+    it(' {designWidth: 750, rootValue: 10} ', () => {
+        return run(`h1 {margin: 0 0 20px;font-size: 40px;line-height: 1.2;}`,
+            `h1 {margin: 0 0 2rpx;font-size: 4rpx;line-height: 1.2;}`,
+            {platform: 'weapp', designWidth: 750, rootValue: '10'})
+    })
 })
 
-it('does something', () => {
-    return run(`h1 {
-    margin: 0 0 20px;
-    font-size: 40px;
-    line-height: 1.2;
-    letter-spacing: 1px;
-}`, `h1 {
-    margin: 0 0 0.5rem;
-    font-size: 1rem;
-    line-height: 1.2;
-    letter-spacing: 0.025rem;
-}`, {platform: 'h5'})
+describe('platform 为 h5', () => {
+    it('{designWidth: 750}', () => {
+        return run(`h1 {margin: 0 0 20px;font-size: 40px;line-height: 1.2;}`,
+            `h1 {margin: 0 0 0.5rem;font-size: 1rem;line-height: 1.2;}`,
+            {platform: 'h5', designWidth: 750})
+    })
+
+    it(' {designWidth: 750, rootValue: 10} ', () => {
+        return run(`h1 {margin: 0 0 20px;font-size: 40px;line-height: 1.2;}`,
+            `h1 {margin: 0 0 2rem;font-size: 4rem;line-height: 1.2;}`,
+            {platform: 'h5', designWidth: 750, rootValue: 10})
+    })
 })
+
 

@@ -33,7 +33,7 @@ options = {
 默认配置下，所有的 px 都会被转换。
 
 ```css
-// input
+/* input */
 h1 {
     margin: 0 0 20px;
     font-size: 32px;
@@ -41,7 +41,7 @@ h1 {
     letter-spacing: 1px;
 }
 
-// weapp output 
+/* weapp output */
 h1 {
     margin: 0 0 20rpx;
     font-size: 40rpx;
@@ -49,7 +49,7 @@ h1 {
     letter-spacing: 1rpx;
 }
 
-// h5 output 
+/* h5 output */
 h1 {
     margin: 0 0 0.5rem;
     font-size: 1rem;
@@ -130,12 +130,12 @@ platform === 'h5'时，其余配置默认如下：
 Currently, the easiest way to have a single property ignored is to use a capital in the pixel unit declaration.
 
 ```css
-// `px` is converted to `rem`
+ /*`px` is converted to `rem`*/
 .convert {
     font-size: 16px; // converted to 1rem
 }
 
-// `Px` or `PX` is ignored by `postcss-pxtorem` but still accepted by browsers
+ /* `Px` or `PX` is ignored by `postcss-pxtorem` but still accepted by browsers*/
 .ignore {
     border: 1Px solid; // ignored
     border-width: 2PX; // ignored
