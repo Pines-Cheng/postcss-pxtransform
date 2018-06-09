@@ -23,11 +23,7 @@ options = {
 ### H5
 ```js
 options = {
-<<<<<<< HEAD
     platform: 'h5',
-=======
-    platform: 'h5,
->>>>>>> 36131b47dcb5eeee3420ecc66982245e5fc46012
     designWidth: 750,
 }
 ```
@@ -102,11 +98,7 @@ Type: `Object | Null`
 `weapp` 或 `h5`
 
 ### `designWidth`（Number）（必填）
-<<<<<<< HEAD
 `640` 或 `750` 或 `828`
-=======
-`640` `750` `828`
->>>>>>> 36131b47dcb5eeee3420ecc66982245e5fc46012
 
 ### `rootValue` (Number) (必填)
 (Number) The root element font size.
