@@ -2,7 +2,7 @@
 
 [PostCSS](https://github.com/ai/postcss) 插件，目前已支持 px 转小程序 rpx 及 h5 rem 单位。
 
-基于 [postcss-pxtransform](https://github.com/cuth/postcss-pxtorem/)。
+基于 [postcss-pxtorem](https://github.com/cuth/postcss-pxtorem/)。
 
 ## Install
 
