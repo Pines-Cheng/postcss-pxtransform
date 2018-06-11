@@ -14,9 +14,6 @@ var val = postcss([
     align-items: center;
     margin: 0 auto;
 }`, {from: undefined})
-    .then(result => {
-        console.log(result.css)
-        console.log(result.warnings().join('//'))
-    })
+    .css
 
-console.log(val);
+console.log('//////////////////////////// val ////////////////////////////\n',val);
