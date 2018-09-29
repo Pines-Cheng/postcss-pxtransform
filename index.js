@@ -43,13 +43,17 @@ module.exports = postcss.plugin('postcss-pxtransform', function (opts) {
 function dealWithWeapp ({root, opts, result}) {
     opts = Object.assign({}, DEFAULT_WEAPP_OPTIONS, opts)
     var css = postcss(pxtorem(opts)).process(root.toResult()).css
+    var designWidth = opts.designWidth || 750;
+    if (!DEVICE_RATIO[designWidth]) {
+        DEVICE_RATIO[designWidth] = Number.parseFloat((750/designWidth).toFixed(2));
+    }
     var cssRoot = postcss.parse(css)
     root.nodes = cssRoot.nodes
 
     root.walkDecls(function (decl) {
         let value = decl.value
         value = value.replace(/([0-9.]+)rem/ig, function (match, size) {
-            return Math.ceil(size / DEVICE_RATIO[opts.designWidth] *
+            return Math.ceil(size / DEVICE_RATIO[designWidth] *
                 10000) / 10000 + 'rpx'
         })
         decl.value = value

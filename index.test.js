@@ -42,6 +42,12 @@ describe('platform 为 weapp', () => {
             `h1 {margin: 0 0 1.7095rpx;font-size: 3.4189rpx;line-height: 1.2;}`,
             {platform: 'weapp', designWidth: 640, rootValue: '10'})
     })
+
+    it(' {designWidth: 375, rootValue: 10} ', () => {
+        return run(`h1 {margin: 0 0 20px;font-size: 40px;line-height: 1.2;}`,
+            `h1 {margin: 0 0 4rpx;font-size: 8rpx;line-height: 2.4;}`,
+            {platform: 'weapp', designWidth: 375, rootValue: '10'})
+    })
 })
 
 describe('platform 为 h5', () => {
@@ -67,6 +73,12 @@ describe('platform 为 h5', () => {
         return run(`h1 {margin: 0 0 20px;font-size: 40px;line-height: 1.2;}`,
             `h1 {margin: 0 0 0.5rem;font-size: 1rem;line-height: 1.2;}`,
             {platform: 'h5', designWidth: 640, rootValue: 40})
+    })
+
+    it(' {designWidth: 375, rootValue: 10} ', () => {
+        return run(`h1 {margin: 0 0 20px;font-size: 40px;line-height: 1.2;}`,
+            `h1 {margin: 0 0 4rem;font-size: 8rem;line-height: 2.4;}`,
+            {platform: 'h5', designWidth: 375, rootValue: 10})
     })
 })
 
